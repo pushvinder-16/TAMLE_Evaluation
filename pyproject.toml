@@ -2,9 +2,21 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+
 [project]
 name = "Housing_Prediction"
 version = "0.0.1"
+dependencies = [
+    "requests",
+    'importlib-metadata; python_version<"3.8"',
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "scipy",
+    "six",
+    "pip"
+]
 authors = [
   { name="Pushvinder Kumar", email="pushvinder.rohta@tigeranalytics.com" },
 ]
