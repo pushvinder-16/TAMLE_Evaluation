@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "Housing_Prediction"
 version = "0.0.1"
 authors = [
-  { name="Pushvinder Kumat", email="pushvinder.rohta@tigeranalytics.com" },
+  { name="Pushvinder Kumar", email="pushvinder.rohta@tigeranalytics.com" },
 ]
 description = "Package for Housing Prediction"
 readme = "README.md"

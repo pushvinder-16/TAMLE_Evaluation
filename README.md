@@ -1,6 +1,12 @@
 # House Price Prediction
 
-This package is used to predict house prices based on several features like location, median income of the household, total rooms, and more. It leverages Python's scientific and machine learning libraries to process data, develop models, and make predictions.
+The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data. 
+
+The following techniques have been used: 
+
+ - Linear regression
+ - Decision Tree
+ - Random Forest
 
 # Getting Started
 
@@ -19,27 +25,30 @@ You need Python 3.x and the following Python libraries installed:
 
 You can install these packages using pip:
 
-pip install numpy pandas matplotlib scikit-learn scipy six
+``` pip install numpy pandas matplotlib scikit-learn scipy six ```
 
 # Installing and Running the Package
 
 Clone the repository to your local machine:
 
 
-git clone https://github.com/your_username/house-price-prediction.git
+```git clone https://github.com/your_username/house-price-prediction.git```
 
 
-Navigate to the cloned repository:
+## Navigate to the cloned repository:
 
-```bash
-cd house-price-prediction
-```
+```cd src```
 
-Run the main script:
+## To excute the script
+    - create a conda environment using the env.yml file using the command "conda env create -f env.yml"
+    -activate the environment using "conda activate mle_training"
+    - Run the code using "python < scriptname.py >"
 
-```bash
-python main.py
-```
+
+## Run the main script:
+
+```python main.py```
+
 
 ## Usage
 
@@ -67,9 +76,9 @@ We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
-* **Your Name**
+* **Pushvinder Kumar**
 
-See also the list of [contributors](https://github.com/your_username/house-price-prediction/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/pushvinderrohtagi/mle_training.git) who participated in this project.
 
 ## License
 
@@ -79,4 +88,4 @@ This project is licensed under the MIT License - see the `LICENSE.md` file for d
 
 This project uses the `California Housing Prices` dataset from the StatLib repository, provided by Aurélien Géron.
 
-For a detailed walkthrough of the project, please refer to the book `Hands-On Machine Learning with Scikit-Learn and TensorFlow` by Aurélien Géron.
+For a detailed walkthrough of the project, please refer the Tiger Analytics documentation
