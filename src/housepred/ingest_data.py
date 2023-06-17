@@ -25,7 +25,7 @@ def load_housing_data(housing_path=HOUSING_PATH):
     return pd.read_csv(csv_path)
 
 
-def main(output_dir):
+def ingest_data_main(output_dir):
     fetch_housing_data(HOUSING_URL, HOUSING_PATH)
     housing = load_housing_data(HOUSING_PATH)
     housing.to_csv(os.path.join(output_dir, "housing_new.csv"), index=False)
@@ -42,5 +42,5 @@ if __name__ == "__main__":
         format="%(levelname)s:%(message)s",
     )
     logging.info("Started data ingestion.")
-    main(args.output_dir)
+    ingest_data_main(args.output_dir)
     logging.info("Finished data ingestion.")

@@ -13,7 +13,7 @@ def load_data(path):
     return pd.read_csv(path)
 
 
-def main(input_dir, model_path):
+def score_main(input_dir, model_path):
     # Load the data
     strat_test_set = load_data(os.path.join(input_dir, "strat_test_set.csv"))
     # imputer = SimpleImputer(strategy="median")
@@ -73,5 +73,5 @@ if __name__ == "__main__":
         format="%(levelname)s:%(message)s",
     )
     logging.info("Started scoring.")
-    main(args.input_dir, args.model_path)
+    score_main(args.input_dir, args.model_path)
     logging.info("Finished scoring.")

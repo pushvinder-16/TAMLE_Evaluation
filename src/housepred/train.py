@@ -16,7 +16,7 @@ def load_data(path):
     return pd.read_csv(path)
 
 
-def main(input_dir, output_dir):
+def train_main(input_dir, output_dir):
     # Load the data
     housing_prepared = load_data(os.path.join(input_dir, "housing_prepared.csv"))
     housing_labels = load_data(os.path.join(input_dir, "housing_labels.csv"))
@@ -102,5 +102,5 @@ if __name__ == "__main__":
         format="%(levelname)s:%(message)s",
     )
     logging.info("Started training.")
-    main(args.input_dir, args.output_dir)
+    train_main(args.input_dir, args.output_dir)
     logging.info("Finished training.")

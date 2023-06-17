@@ -16,7 +16,7 @@ def income_cat_proportions(data):
     return data["income_cat"].value_counts() / len(data)
 
 
-def main(input_dir, output_dir):
+def data_prep_main(input_dir, output_dir):
     housing = load_data(os.path.join(input_dir, "housing.csv"))
 
     # Create an income category attribute
@@ -102,5 +102,5 @@ if __name__ == "__main__":
         format="%(levelname)s:%(message)s",
     )
     logging.info("Started data preparation.")
-    main(args.input_dir, args.output_dir)
+    data_prep_main(args.input_dir, args.output_dir)
     logging.info("Finished data preparation.")
