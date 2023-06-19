@@ -10,10 +10,31 @@ from sklearn.metrics import mean_squared_error
 
 
 def load_data(path):
+    """Load data from csv file.
+
+    Parameters
+    ----------
+    path : str
+        Path to csv file.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe containing data.
+    """
     return pd.read_csv(path)
 
 
 def score_main(input_dir, model_path):
+    """Main function for scoring that takes input and model directories and tests the model.
+
+    Parameters
+    ----------
+    input_dir : str
+        Input directory.
+    model_path : str
+        Model directory.
+    """
     # Load the data
     strat_test_set = load_data(os.path.join(input_dir, "strat_test_set.csv"))
     # imputer = SimpleImputer(strategy="median")

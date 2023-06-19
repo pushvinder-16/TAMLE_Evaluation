@@ -9,14 +9,49 @@ from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
 
 
 def load_data(path):
+    # generate numpy style doctrings for this function
+    """Load data from csv file.
+
+    Parameters
+    ----------
+    path : str
+        Path to csv file.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe containing data.
+    """
+
     return pd.read_csv(path)
 
 
 def income_cat_proportions(data):
+    """Calculate income category proportions.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Dataframe containing data.
+
+    Returns
+    -------
+    pd.Series
+        Series containing income category proportions.
+    """
     return data["income_cat"].value_counts() / len(data)
 
 
 def data_prep_main(input_dir, output_dir):
+    """Main function for data preparation that takes input and output directories and creates train and test sets.
+
+    Parameters
+    ----------
+    input_dir : str
+        Input directory.
+    output_dir : str
+        Output directory.
+    """
     housing = load_data(os.path.join(input_dir, "housing.csv"))
 
     # Create an income category attribute

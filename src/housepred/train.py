@@ -13,10 +13,31 @@ from sklearn.tree import DecisionTreeRegressor
 
 
 def load_data(path):
+    """Load data from csv file.
+
+    Parameters
+    ----------
+    path : str
+        Path to csv file.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe containing data.
+    """
     return pd.read_csv(path)
 
 
 def train_main(input_dir, output_dir):
+    """Main function for training that takes input and output directories and trains the model.
+
+    Parameters
+    ----------
+    input_dir : str
+        Input directory.
+    output_dir : str
+        Output directory.
+    """
     # Load the data
     housing_prepared = load_data(os.path.join(input_dir, "housing_prepared.csv"))
     housing_labels = load_data(os.path.join(input_dir, "housing_labels.csv"))
