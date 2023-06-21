@@ -1,6 +1,6 @@
 import pytest
 
-from src.data_prep import income_cat_proportions
+from housepred.data_prep import income_cat_proportions
 
 
 def test_income_cat_proportions():

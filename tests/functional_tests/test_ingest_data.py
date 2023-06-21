@@ -1,6 +1,6 @@
 import pytest
 
-from src.ingest_data import load_data
+from housepred.ingest_data import load_data
 
 
 def test_load_data():

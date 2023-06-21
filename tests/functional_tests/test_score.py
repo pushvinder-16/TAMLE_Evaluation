@@ -1,6 +1,6 @@
 import pytest
 
-from src.score import score_model
+from housepred.score import score_model
 
 
 def test_score_model():

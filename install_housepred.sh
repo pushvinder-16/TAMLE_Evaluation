@@ -14,8 +14,6 @@ else
     conda activate mle-dev
 fi
 
-# Conda install HDBSCAN package as pip install hdbscan has gcc incompatibility issues
-conda install -c conda-forge hdbscan==0.8.29 -y
 
 # If user options are provided
 while [[ $# -gt 0 ]]; do
