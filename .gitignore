@@ -1,5 +1,5 @@
 # Ignore bin folders
-*/bin
+bin
 
 # Ignore nohup files
 *nohup.out
