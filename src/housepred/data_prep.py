@@ -134,6 +134,16 @@ def data_prep_main(input_dir, output_dir):
     with open(os.path.join(model_path, "full_pipeline.pkl"), "wb") as f:
         pickle.dump(full_pipeline, f)
 
+    prep_info = {
+        "num_samples": len(housing),
+        "num_features": housing.shape[1],
+        "missing_values": housing.isnull().sum().sum(),
+        "output_dir": output_dir,
+        "model_path": model_path,
+    }
+
+    return (output_dir, model_path, prep_info)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Data preparation script.")

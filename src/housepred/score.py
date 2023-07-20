@@ -42,7 +42,7 @@ def score_main(input_dir, model_path):
     strat_test_set.drop("income_cat", axis=1, inplace=True)
 
     # load the imputer
-    with open(os.path.join(model_path, "imputer.pkl"), "rb") as f:
+    with open(os.path.join(model_path, "full_pipeline.pkl"), "rb") as f:
         imputer = pickle.load(f)
 
     # Add additional attributes
@@ -55,20 +55,20 @@ def score_main(input_dir, model_path):
 
     # Data Imputation
 
-    housing_num = housing.drop("ocean_proximity", axis=1)
+    housing_num = housing
 
     imputer.fit(housing_num)
     X = imputer.transform(housing_num)
 
-    housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing.index)
-    housing_tr["rooms_per_household"] = housing_tr["total_rooms"] / housing_tr["households"]
-    housing_tr["bedrooms_per_room"] = housing_tr["total_bedrooms"] / housing_tr["total_rooms"]
-    housing_tr["population_per_household"] = housing_tr["population"] / housing_tr["households"]
+    # housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing.index)
+    # housing_tr["rooms_per_household"] = housing_tr["total_rooms"] / housing_tr["households"]
+    # housing_tr["bedrooms_per_room"] = housing_tr["total_bedrooms"] / housing_tr["total_rooms"]
+    # housing_tr["population_per_household"] = housing_tr["population"] / housing_tr["households"]
 
-    housing_cat = housing[["ocean_proximity"]]
-    housing_prepared = housing_tr.join(pd.get_dummies(housing_cat, drop_first=True))
+    # housing_cat = housing[["ocean_proximity"]]
+    # housing_prepared = housing_tr.join(pd.get_dummies(housing_cat, drop_first=True))
 
-    X_test_prepared = housing_prepared.copy()
+    X_test_prepared = X.copy()
 
     # Load the model
     with open(os.path.join(model_path, "best_model.pkl"), "rb") as f:
@@ -80,6 +80,9 @@ def score_main(input_dir, model_path):
     final_rmse = np.sqrt(final_mse)
     print(final_rmse)
     logging.info(f"Final RMSE: {final_rmse}")
+
+    eval_info = {"final_rmse": final_rmse, "input_dir": input_dir, "model_path": model_path}
+    return (final_rmse, eval_info)
 
 
 if __name__ == "__main__":
