@@ -41,7 +41,7 @@ def train_main(input_dir, output_dir):
     # Load the data
     housing_prepared = load_data(os.path.join(input_dir, "housing_prepared.csv"))
     housing_labels = load_data(os.path.join(input_dir, "housing_labels.csv"))
-
+    print(housing_prepared.columns)
     # Linear Regression
     lin_reg = LinearRegression()
     lin_reg.fit(housing_prepared, housing_labels)
@@ -109,6 +109,29 @@ def train_main(input_dir, output_dir):
         pickle.dump(final_model, f)
 
     logging.info(f'Saved the best model to {os.path.join(output_dir, "best_model.pkl")}')
+
+    # Compute training and validation loss
+    train_predictions = final_model.predict(housing_prepared)
+    train_mse = mean_squared_error(housing_labels, train_predictions)
+    train_loss = np.sqrt(train_mse)
+    logging.info(f"Training Loss: {train_loss}")
+
+    validation_loss = np.sqrt(-grid_search.best_score_)
+    logging.info(f"Validation Loss: {validation_loss}")
+
+    # Create train_info dictionary
+    train_info = {
+        "best_params_grid_search": grid_search.best_params_,
+        "lin_rmse": lin_rmse,
+        "tree_rmse": tree_rmse,
+        "feature_importances": importance_scores,
+        "input_dir": input_dir,
+        "output_dir": output_dir,
+        "train_loss": train_loss,
+        "validation_loss": validation_loss,
+    }
+
+    return (input_dir, output_dir, train_info)
 
 
 if __name__ == "__main__":

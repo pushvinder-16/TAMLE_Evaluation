@@ -4,8 +4,11 @@ import numpy as np
 import os
 import pandas as pd
 import pickle
+from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def load_data(path):
@@ -40,6 +43,14 @@ def income_cat_proportions(data):
         Series containing income category proportions.
     """
     return data["income_cat"].value_counts() / len(data)
+
+
+num_pipeline = Pipeline(
+    [
+        ("imputer", SimpleImputer(strategy="median")),
+        ("std_scaler", StandardScaler()),
+    ]
+)
 
 
 def data_prep_main(input_dir, output_dir):
@@ -99,30 +110,39 @@ def data_prep_main(input_dir, output_dir):
 
     housing_labels = strat_train_set["median_house_value"].copy()
 
-    # Data Imputation
-    imputer = SimpleImputer(strategy="median")
+    # Data Imputation, Standard Scaling and One Hot Encoding using Pipeline
+    num_attribs = list(housing.drop("ocean_proximity", axis=1))
+    cat_attribs = ["ocean_proximity"]
 
-    housing_num = housing.drop("ocean_proximity", axis=1)
+    full_pipeline = ColumnTransformer(
+        [
+            ("num", num_pipeline, num_attribs),
+            ("cat", OneHotEncoder(), cat_attribs),
+        ]
+    )
 
-    imputer.fit(housing_num)
-    X = imputer.transform(housing_num)
-
-    housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing.index)
-    housing_tr["rooms_per_household"] = housing_tr["total_rooms"] / housing_tr["households"]
-    housing_tr["bedrooms_per_room"] = housing_tr["total_bedrooms"] / housing_tr["total_rooms"]
-    housing_tr["population_per_household"] = housing_tr["population"] / housing_tr["households"]
-
-    housing_cat = housing[["ocean_proximity"]]
-    housing_prepared = housing_tr.join(pd.get_dummies(housing_cat, drop_first=True))
+    housing_prepared = full_pipeline.fit_transform(housing)
 
     # Save the prepared data and labels
-    housing_prepared.to_csv(os.path.join(output_dir, "housing_prepared.csv"), index=False)
+    pd.DataFrame(housing_prepared).to_csv(
+        os.path.join(output_dir, "housing_prepared.csv"), index=False
+    )
     housing_labels.to_csv(os.path.join(output_dir, "housing_labels.csv"), index=False)
 
-    # saving imputer
+    # saving pipeline
     model_path = "/home/pushvinder/mle_training/artifacts/"
-    with open(os.path.join(model_path, "imputer.pkl"), "wb") as f:
-        pickle.dump(imputer, f)
+    with open(os.path.join(model_path, "full_pipeline.pkl"), "wb") as f:
+        pickle.dump(full_pipeline, f)
+
+    prep_info = {
+        "num_samples": len(housing),
+        "num_features": housing.shape[1],
+        "missing_values": housing.isnull().sum().sum(),
+        "output_dir": output_dir,
+        "model_path": model_path,
+    }
+
+    return (output_dir, model_path, prep_info)
 
 
 if __name__ == "__main__":
