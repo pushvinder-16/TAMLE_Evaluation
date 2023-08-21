@@ -1,12 +1,13 @@
+
 # House Price Prediction
 
-The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data. 
+The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data.
 
-The following techniques have been used: 
+The following techniques have been used:
 
- - Linear regression
- - Decision Tree
- - Random Forest
+- Linear regression
+- Decision Tree
+- Random Forest
 
 # Getting Started
 
@@ -31,61 +32,39 @@ You can install these packages using pip:
 
 Clone the repository to your local machine:
 
-
 ```git clone https://github.com/your_username/house-price-prediction.git```
 
-
-## Navigate to the cloned repository:
+Navigate to the cloned repository:
 
 ```cd src```
 
-## To excute the script
-    - create a conda environment using the env.yml file using the command "conda env create -f env.yml"
-    -activate the environment using "conda activate mle_training"
-    - Run the code using "python < scriptname.py >"
+## Installation using Artifacts
 
+To install the package using the artifacts, run:
 
-## Run the main script:
+```bash
+pip install ./dist/package_name.whl
+```
 
-```python main.py```
+Replace `package_name.whl` with the appropriate name of the wheel file in the `dist` directory.
 
+## Testing the Installation
 
-## Usage
+After installing the package, you can test its functionality by running:
 
-The main script fetches the dataset from an online source, performs data cleaning and preparation, and uses various machine learning models to predict house prices.
+```bash
+pytest tests/unit_tests/test_scripts.py
+```
 
-Here is an overview of the operations performed:
+## Logs
 
-1. Fetching and loading data.
-2. Splitting data into training and testing sets.
-3. Exploratory Data Analysis (EDA).
-4. Handling missing values and categorical features.
-5. Implementing models like Linear Regression, Decision Tree Regressor, and Random Forest Regressor.
-6. Using Grid Search and Randomized Search for hyperparameter tuning.
-7. Evaluating models and making predictions.
+You can find the logs for the application under the `logs` directory.
 
-The results of these operations, such as model performance metrics, are printed out to the console. You can modify the script according to your requirements to get more insights or to tweak the model's configuration.
+## Configuration
 
-## Contributing
+For any configuration changes, please refer to the configuration files located in the `config` directory. (Note: This section is a placeholder and should be updated based on the actual configuration setup of the application.)
 
-Please read `CONTRIBUTING.md` for details on our code of conduct, and the process for submitting pull requests.
+## Additional Information
 
-## Versioning
+Any other pertinent information related to the application can be found in the respective documentation or code comments.
 
-We use [SemVer](http://semver.org/) for versioning.
-
-## Authors
-
-* **Pushvinder Kumar**
-
-See also the list of [contributors](https://github.com/pushvinderrohtagi/mle_training.git) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the `LICENSE.md` file for details.
-
-## Acknowledgments
-
-This project uses the `California Housing Prices` dataset from the StatLib repository, provided by Aurélien Géron.
-
-For a detailed walkthrough of the project, please refer the Tiger Analytics documentation
